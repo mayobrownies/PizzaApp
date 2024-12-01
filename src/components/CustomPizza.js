@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import cheesePizzaImage from "./styles/images/cheese-pizza.jpg";
-import "./styles/CheesePizza.css";
+import cheesePizzaImage from "./styles/images/custom-pizza.jpg";
+import "./styles/CustomPizza.css";
 
-<<<<<<< Updated upstream
-function CheesePizza() {
-=======
-function CheesePizza({addToCart}) {
->>>>>>> Stashed changes
-  const [extraCheese, setExtraCheese] = useState(false);
+function CustomPizza({addToCart}) {
   const [crustType, setCrustType] = useState("medium");
   const [size, setSize] = useState("medium");
+  const [toppings, setToppings] = useState([]);
 
-  const handleExtraCheeseChange = () => {
-    setExtraCheese((prevState) => !prevState);
-  };
+  const availableToppings = [
+    { name: "Mushrooms", price: 1.5 },
+    { name: "Pepperoni", price: 2.0 },
+    { name: "Olives", price: 1.2 },
+    { name: "Green Peppers", price: 1.0 },
+    { name: "Extra Cheese", price: 1.5 },
+    { name: "Onions", price: 1.0 },
+  ];
 
   const handleCrustChange = (type) => {
     setCrustType(type);
@@ -24,26 +25,14 @@ function CheesePizza({addToCart}) {
     setSize(sizeOption);
   };
 
-  const handleSubmit = () => {
-<<<<<<< Updated upstream
-    console.log("Saving pizza order:", {
-      extraCheese,
-      crustType,
-      size,
+  const toggleTopping = (topping) => {
+    setToppings((prevToppings) => {
+      if (prevToppings.includes(topping)) {
+        return prevToppings.filter((item) => item !== topping);
+      } else {
+        return [...prevToppings, topping];
+      }
     });
-=======
-    const toppings = extraCheese ? ["Extra Cheese"] : "None";
-    const order = {
-      name: "Cheese Pizza",
-      toppings,
-      crustType,
-      size,
-      price: getTotalPrice(),
-      type: "pizza",
-    };
-    addToCart(order);
-    console.log("Order added to cart", order);
->>>>>>> Stashed changes
   };
 
   const getPriceForSize = () => {
@@ -60,24 +49,38 @@ function CheesePizza({addToCart}) {
   };
 
   const getTotalPrice = () => {
-    let basePrice = getPriceForSize();
-    if (extraCheese) {
-      basePrice += 0.99;
-    }
-    return basePrice.toFixed(2);
+    const toppingsPrice = toppings.reduce((total, topping) => {
+      const toppingPrice = availableToppings.find((item) => item.name === topping)?.price || 0;
+      return total + toppingPrice;
+    }, 0);
+
+    return (getPriceForSize() + toppingsPrice).toFixed(2);
+  };
+
+  const handleSubmit = () => {
+    const order = {
+      name: "Custom Pizza",
+      toppings: toppings.length > 0 ? toppings : "None",
+      crustType,
+      size,
+      price: getTotalPrice(),
+      type: "pizza",
+    };
+    addToCart(order);
+    console.log("Order added to cart", order);
   };
 
   return (
-    <div className="cheese-pizza-container">
+    <div className="custom-pizza-container">
       <Link to="/menu" className="back-arrow">
         ← Back to Menu
       </Link>
 
-      <h1 className="pizza-title">Cheese Pizza</h1>
+      <h1 className="pizza-title">Custom Pizza</h1>
 
       <div className="info-container">
         <div className="pizza-image-container">
-          <img src={cheesePizzaImage} alt="Cheese Pizza" className="pizza-image" />
+          <img src={cheesePizzaImage} alt="Custom Pizza" className="pizza-image" />
         </div>
 
         <div className="options">
@@ -107,22 +110,21 @@ function CheesePizza({addToCart}) {
           </div>
 
           <div>
-            <button className={`extra-cheese-button ${extraCheese ? "active" : ""}`} onClick={() => handleExtraCheeseChange()}>
-              Extra Cheese $0.99
-            </button>
+            <p>Select Toppings:</p>
+            <div className="topping-selection">
+              {availableToppings.map((topping) => (
+                <button key={topping.name} className={`topping-button ${toppings.includes(topping.name) ? "selected" : ""}`} onClick={() => toggleTopping(topping.name)}>
+                  {topping.name} (${topping.price.toFixed(2)})
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="summary">
             <h3>Your Selection:</h3>
-<<<<<<< Updated upstream
-            <p>{extraCheese ? "Extra Cheese: Yes" : "Extra Cheese: No"}</p>
             <p>Crust Type: {crustType === "thin" ? "Thin Crust" : "Medium Crust"}</p>
             <p>Size: {size.charAt(0).toUpperCase() + size.slice(1)}</p>
-=======
-            <p>Crust Type: {crustType === "thin" ? "Thin Crust" : "Medium Crust"}</p>
-            <p>Size: {size.charAt(0).toUpperCase() + size.slice(1)}</p>
-            <p>{extraCheese ? "Extra Cheese: Yes" : "Extra Cheese: No"}</p>
->>>>>>> Stashed changes
+            <p>Toppings: {toppings.length > 0 ? toppings.join(", ") : "None"}</p>
             <p>Price: ${getTotalPrice()}</p>
           </div>
 
@@ -135,4 +137,4 @@ function CheesePizza({addToCart}) {
   );
 }
 
-export default CheesePizza;
+export default CustomPizza;

@@ -12,8 +12,13 @@ const menuItems = [
   { name: "Cheese Pizza", image: cheese, path: "/cheese-pizza"},
   { name: "Pepperoni Pizza", image: pepperoni },
   { name: "Veggie Pizza", image: veggie },
+<<<<<<< Updated upstream
   { name: "Custom Pizza", image: custom },
   { name: "Soft Drink", image: drink },
+=======
+  { name: "Custom Pizza", image: custom, path: "/custom-pizza"},
+  { name: "Beverages", image: drink, path: "/drinks"},
+>>>>>>> Stashed changes
 ];
 
 function Menu() {
