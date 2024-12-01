@@ -1,0 +1,141 @@
+.back-arrow {
+  font-size: 18px;
+  color: #6c757d;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 15px;
+  margin-left: 10px;
+  position: absolute;
+  left: 10px
+}
+  
+.info-container{
+  display: flex;
+  gap: 10%;
+  justify-content: center;
+  align-items: center;
+}
+
+.cheese-pizza-container {
+  padding: 20px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  margin-top: 120px;
+}
+
+.pizza-title{
+  font-size: 32px;
+  color: #e63946;
+  margin-bottom: 40px;
+  margin-top: 40px;
+}
+
+.pizza-image-container {
+  text-align: center;
+  margin-bottom: 30px;
+  border: 2px solid #e63946;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 80%;
+  width: 50%;
+}
+
+.pizza-image {
+  width: 100%;
+  max-width: 400px;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.customize-text{
+  font-size: 20px;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 15px; 
+}
+
+.summary {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.submit-button {
+  background-color: #e63946;
+  color: #fff;
+  border: none;
+  padding: 12px 25px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%;
+  max-width: 250px;
+  margin-top: 30px;
+}
+
+.crust-buttons, .size-buttons, .extra-cheese-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.crust-button, .size-button, .extra-cheese-button {
+  background-color: #f1f1f1;
+  color: #333;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 0 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.crust-button.active, .size-button.active, .extra-cheese-button.active {
+  background-color: #e63946;
+  color: #fff;
+}
+
+.crust-button:hover, .size-button:hover, .extra-cheese-button:hover {
+  background-color: #e0e0e0;
+}
+
+.crust-button.active:hover, .size-button.active:hover, .extra-cheese-button.active:hover, .submit-button:hover {
+  background-color: #c32e3b;
+}
+
+@media (max-width: 740px) {
+  .info-container {
+    flex-direction: column; 
+    justify-content: flex-start;
+    align-items: center; 
+    height: auto; 
+  }
+
+  .cheese-pizza-container {
+    flex-direction: column; 
+    align-items: center; 
+  }
+
+  .pizza-image-container {
+    margin-bottom: 20px; 
+    margin-right: 0; 
+  }
+}
